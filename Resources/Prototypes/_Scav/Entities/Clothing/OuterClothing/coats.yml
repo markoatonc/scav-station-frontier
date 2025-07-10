@@ -5,9 +5,9 @@
   description: The signature uniform of Tradehouse Ivenmoth.
   components:
   - type: Sprite
-    sprite: Clothing\OuterClothing\Coats\tradehouseredcoat.rsi
+    sprite: _Scav/Clothing/OuterClothing/Coats/tradehouseredcoat.rsi
   - type: Clothing
-    sprite: Clothing\OuterClothing\Coats\tradehouseredcoat.rsi
+    sprite: _Scav/Clothing/OuterClothing/Coats/tradehouseredcoat.rsi
 
 - type: entity
   parent: [ClothingOuterStorageFoldableBaseOpened, ClothingOuterCoatTradehouse]
@@ -21,9 +21,9 @@
   description: The signature uniform of Tradehouse Ivenmoth. The gold markings and badge mark its wearer as an officer.
   components:
   - type: Sprite
-    sprite: Clothing\OuterClothing\Coats\tradehouseredcoat_officer.rsi
+    sprite: _Scav/Clothing/OuterClothing/Coats/tradehouseredcoat_officer.rsi
   - type: Clothing
-    sprite: Clothing\OuterClothing\Coats\tradehouseredcoat_officer.rsi
+    sprite: _Scav/Clothing/OuterClothing/Coats/tradehouseredcoat_officer.rsi
 
 - type: entity
   parent: [ClothingOuterStorageFoldableBaseOpened, ClothingOuterCoatTradehouseOfficer]
