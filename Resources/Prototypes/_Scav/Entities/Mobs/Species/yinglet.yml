@@ -11,18 +11,18 @@
 #    - HeadTop
   - type: Hunger
     thresholds:
-      Overfed: 35
-      Okay: 25
-      Peckish: 15
-      Starving: 10
+      Overfed: 120
+      Okay: 90
+      Peckish: 60
+      Starving: 30
       Dead: 0
   - type: Thirst
-    startingThirst: 25
+    startingThirst: 270
     thresholds:
-      OverHydrated: 35
-      Okay: 25
-      Thirsty: 15
-      Parched: 10
+      OverHydrated: 360
+      Okay: 270
+      Thirsty: 180
+      Parched: 90
       Dead: 0
   - type: Icon
     sprite: _Scav/Mobs/Species/Yinglet/parts.rsi
