@@ -249,9 +249,9 @@
           color: "#3D342D"
   sprites:
   - sprite: _Scav/Mobs/Customization/Yinglet/yinglet_limbs.rsi
-    state: r_foot_big
+    state: l_foot_big
   - sprite: _Scav/Mobs/Customization/Yinglet/yinglet_limbs.rsi
-    state: r_foot_big_spots
+    state: l_foot_big_spots
 
 - type: marking
   id: YingletRFootBig
@@ -269,9 +269,9 @@
           color: "#3D342D"
   sprites:
   - sprite: _Scav/Mobs/Customization/Yinglet/yinglet_limbs.rsi
-    state: l_foot_big
+    state: r_foot_big
   - sprite: _Scav/Mobs/Customization/Yinglet/yinglet_limbs.rsi
-    state: l_foot_big_spots
+    state: r_foot_big_spots
 
 
 - type: marking
