@@ -35,6 +35,14 @@ public sealed class GeneralStationRecordConsoleBoundUserInterface : BoundUserInt
     {
         SendMessage(new AdjustStationJobMsg(job, 1));
     }
+    private void OnJobsUnset(ProtoId<JobPrototype> job)
+    {
+        SendMessage(new AdjustStationJobMsg(job, 0));
+    }
+    private void OnJobsSet(ProtoId<JobPrototype> job)
+    {
+        SendMessage(new AdjustStationJobMsg(job, -1));
+    }
     private void OnJobsSubtract(ProtoId<JobPrototype> job)
     {
         SendMessage(new AdjustStationJobMsg(job, -1));

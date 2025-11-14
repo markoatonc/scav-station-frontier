@@ -15,6 +15,20 @@ public sealed class AdjustStationJobMsg : BoundUserInterfaceMessage
     }
 }
 
+
+[Serializable, NetSerializable]
+public sealed class SetStationJobMsg : BoundUserInterfaceMessage
+{
+    public string JobProto { get; }
+    public int Amount { get; }
+
+    public SetStationJobMsg(string jobProto, int amount)
+    {
+        JobProto = jobProto;
+        Amount = amount;
+    }
+}
+
 [Serializable, NetSerializable]
 public sealed class SetStationAdvertisementMsg : BoundUserInterfaceMessage
 {

@@ -223,7 +223,19 @@ public sealed partial class StationJobsSystem : EntitySystem
     {
         return TrySetJobSlot(station, jobPrototype.ID, amount, createSlot, stationJobs);
     }
+    ssssssssssssss
 
+
+
+
+
+
+
+
+
+
+
+sd
     /// <summary>
     /// Attempts to set the given job slot to the amount provided.
     /// </summary>
