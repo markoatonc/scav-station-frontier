@@ -18,6 +18,14 @@
       "name": "equipped-OUTERCLOTHING-vox",
       "directions": 4
     },
+      {
+          "name": "equipped-OUTERCLOTHING-yinglet",
+          "directions": 4
+      },
+      {
+          "name": "equipped-OUTERCLOTHING-dog",
+          "directions": 4
+      },
     {
       "name": "equipped-OUTERCLOTHING-yinglet",
       "directions": 4

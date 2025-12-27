@@ -213,6 +213,13 @@
   - type: MiningGatheringSoft # Frontier
 
 - type: entity
+  parent: BulletChargeGlaive
+  id: NFBulletChargeGlaive
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: MiningGatheringSoft # Frontier
+
+- type: entity
   parent: AnomalousParticleDelta
   id: NFAnomalousParticleDelta
   categories: [ HideSpawnMenu ]
@@ -423,6 +430,11 @@
   parent: AntiParticlesProjectile
   id: NFAntiParticlesProjectile
   categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Radiation: 5
 
 - type: entity
   parent: BulletDisablerPractice

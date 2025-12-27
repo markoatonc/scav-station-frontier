@@ -20,9 +20,6 @@
           Quantity: 2 #Scav 5<2
   - type: Item
     size: Tiny
-  - type: Tag
-    tags:
-    - VoxFood
 
 # Muffins
 

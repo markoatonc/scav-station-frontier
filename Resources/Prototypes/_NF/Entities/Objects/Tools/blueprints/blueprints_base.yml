@@ -89,12 +89,11 @@
   - type: Blueprint
     providedRecipes: []
 
-# region Generic
 - type: entity
   parent: NFBaseBlueprint
   id: NFBaseBlueprintFaxable
   name: blueprint
-  description: A blueprint with schematics on it. It can be inserted into an autolathe or sent via fax.
+  description: A blueprint with schematics on it. It can be inserted into a protolathe or techfab, or sent via fax.
   abstract: true
   components:
   - type: FaxableObject
@@ -126,12 +125,50 @@
         color: "#636363"
       - state: inhand-right-text
 
+# region General
+- type: entity
+  parent: NFBaseBlueprintFaxable
+  id: NFBlueprintGeneral
+  name: blueprint
+  description: A blueprint with schematics on it. It can be inserted into a protolathe or techfab, or sent via fax.
+  categories: [HideSpawnMenu, DoNotMap]
+  components:
+  - type: Sprite
+    layers:
+      - state: icon-base
+        color: "#3355ff"
+      - state: icon-text
+      - sprite: Objects/Misc/bureaucracy.rsi
+        state: paper_stamp-generic
+        offset: 0.15,-0.1
+        map: ["enum.PaperVisualLayers.Stamp"]
+        visible: false
+      - sprite: Objects/Misc/bureaucracy.rsi
+        state: paper_words
+        map: ["enum.PaperVisualLayers.Writing"]
+        visible: false
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: inhand-left-base
+        color: "#3355ff"
+      - state: inhand-left-text
+      right:
+      - state: inhand-right-base
+        color: "#3355ff"
+      - state: inhand-right-text
+  - type: Tag
+    tags:
+    - NFBlueprintAdvanced
+    - Document
+    - Paper
+
 # region Engineering
 - type: entity
   parent: NFBaseBlueprintFaxable
   id: NFBlueprintEngineering
   name: engineering blueprint
-  description: A blueprint with engineering schematics on it. It can be inserted into an engineering techfab or sent via fax.
+  description: A blueprint with engineering schematics on it. It can be inserted into a protolathe or techfab, or sent via fax.
   categories: [HideSpawnMenu, DoNotMap]
   components:
   - type: Sprite
@@ -162,6 +199,7 @@
     tags:
     - BlueprintAutolathe #Scav
     - NFBlueprintEngineeringTechfab
+    - NFBlueprintAdvanced
     - Document
     - Paper
 
@@ -170,7 +208,7 @@
   parent: NFBaseBlueprintFaxable
   id: NFBlueprintSalvage
   name: salvage blueprint
-  description: A blueprint with salvage schematics on it. It can be inserted into a salvage techfab or sent via fax.
+  description: A blueprint with salvage schematics on it. It can be inserted into a protolathe or techfab, or sent via fax.
   categories: [HideSpawnMenu, DoNotMap]
   components:
   - type: Sprite
@@ -201,6 +239,7 @@
     tags:
     - BlueprintAutolathe #Scav
     - NFBlueprintSalvageTechfab
+    - NFBlueprintAdvanced
     - Document
     - Paper
 
@@ -209,7 +248,7 @@
   parent: NFBaseBlueprintFaxable
   id: NFBlueprintScience
   name: science blueprint
-  description: A blueprint with science schematics on it. It can be inserted into a protolathe or sent via fax.
+  description: A blueprint with science schematics on it. It can be inserted into a protolathe or techfab, or sent via fax.
   categories: [HideSpawnMenu, DoNotMap]
   components:
   - type: Sprite
@@ -240,6 +279,7 @@
     tags:
     - BlueprintAutolathe #Scav
     - NFBlueprintProtolathe
+    - NFBlueprintAdvanced
     - Document
     - Paper
 
@@ -248,7 +288,7 @@
   parent: NFBaseBlueprintFaxable
   id: NFBlueprintService
   name: service blueprint
-  description: A blueprint with service schematics on it. It can be inserted into a service techfab or sent via fax.
+  description: A blueprint with service schematics on it. It can be inserted into a protolathe or techfab, or sent via fax.
   categories: [HideSpawnMenu, DoNotMap]
   components:
   - type: Sprite
@@ -279,6 +319,7 @@
     tags:
     - BlueprintAutolathe #Scav
     - NFBlueprintServiceTechfab
+    - NFBlueprintAdvanced
     - Document
     - Paper
 
@@ -287,7 +328,7 @@
   parent: NFBaseBlueprintFaxable
   id: NFBlueprintMedical
   name: medical blueprint
-  description: A blueprint with medical schematics on it. It can be inserted into a medical techfab or sent via fax.
+  description: A blueprint with medical schematics on it. It can be inserted into a protolathe or techfab, or sent via fax.
   categories: [HideSpawnMenu, DoNotMap]
   components:
   - type: Sprite
@@ -318,15 +359,16 @@
     tags:
     - BlueprintAutolathe #Scav
     - NFBlueprintMedicalTechfab
+    - NFBlueprintAdvanced
     - Document
     - Paper
 
 # region Arsenal
 - type: entity
   parent: NFBaseBlueprintFaxable
-  id: NFBlueprintArsenal
+  id: NFBlueprintArsenalMercenary
   name: combat blueprint
-  description: A blueprint with combat schematics on it. It can be inserted into an NFSD or mercenary techfab or sent via fax.
+  description: A blueprint with combat schematics on it. It can be inserted into a protolathe or techfab, or sent via fax.
   categories: [HideSpawnMenu, DoNotMap]
   components:
   - type: Sprite
@@ -357,6 +399,7 @@
     tags:
     - BlueprintAutolathe #Scav
     - NFBlueprintMercenaryTechfab
+    - NFBlueprintAdvanced
     - Document
     - Paper
 
@@ -364,7 +407,7 @@
   parent: NFBaseBlueprintFaxable
   id: NFBlueprintArsenalNfsd
   name: restricted combat blueprint
-  description: A blueprint with combat schematics on it. It can be inserted into an NFSD techfab or sent via fax.
+  description: A blueprint with combat schematics on it. It can be inserted into a protolathe or techfab, or sent via fax.
   categories: [HideSpawnMenu, DoNotMap]
   components:
   - type: Sprite
@@ -395,6 +438,7 @@
     tags:
     - BlueprintAutolathe #Scav
     - NFBlueprintNfsdTechfab
+    - NFBlueprintAdvanced
     - Document
     - Paper
 
@@ -450,6 +494,7 @@
     tags:
     - BlueprintAutolathe #Scav
     - NFBlueprintSalvageTechfab
+    - NFBlueprintAdvanced
     - Document
     - Paper
 
@@ -490,5 +535,6 @@
     - BlueprintAutolathe #Scav
     - NFBlueprintMercenaryTechfab
     - NFBlueprintNfsdTechfab
+    - NFBlueprintAdvanced
     - Document
     - Paper

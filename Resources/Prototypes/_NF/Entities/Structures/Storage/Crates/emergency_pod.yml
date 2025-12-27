@@ -101,5 +101,6 @@
     node: medicalpod
     containers:
     - entity_storage
+  - type: NFForkLiftable
   - type: ShipyardSellCondition # Scav
     preserveOnSale: true # Scav

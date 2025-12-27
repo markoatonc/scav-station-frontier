@@ -289,7 +289,7 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
         }
         else
         {
-            navState = new NavInterfaceState(0f, null, null, new Dictionary<NetEntity, List<DockingPortState>>(), InertiaDampeningMode.Dampen, ServiceFlags.None); // Frontier: inertia dampening);
+            navState = new NavInterfaceState(0f, null, null, new Dictionary<NetEntity, List<DockingPortState>>(), InertiaDampeningMode.Dampen, ServiceFlags.None, null, NetEntity.Invalid, true); // Frontier: inertia dampening
             mapState = new ShuttleMapInterfaceState(
                 FTLState.Invalid,
                 default,
@@ -340,7 +340,7 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
 
     public void AddPilot(EntityUid uid, EntityUid entity, ShuttleConsoleComponent component)
     {
-        if (!EntityManager.TryGetComponent(entity, out PilotComponent? pilotComponent)
+        if (!TryComp(entity, out PilotComponent? pilotComponent)
         || component.SubscribedPilots.Contains(entity))
         {
             return;
@@ -354,7 +354,7 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
 
         pilotComponent.Console = uid;
         ActionBlockerSystem.UpdateCanMove(entity);
-        pilotComponent.Position = EntityManager.GetComponent<TransformComponent>(entity).Coordinates;
+        pilotComponent.Position = Comp<TransformComponent>(entity).Coordinates;
         Dirty(entity, pilotComponent);
     }
 
@@ -377,12 +377,12 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
         _popup.PopupEntity(Loc.GetString("shuttle-pilot-end"), pilotUid, pilotUid);
 
         if (pilotComponent.LifeStage < ComponentLifeStage.Stopping)
-            EntityManager.RemoveComponent<PilotComponent>(pilotUid);
+            RemComp<PilotComponent>(pilotUid);
     }
 
     public void RemovePilot(EntityUid entity)
     {
-        if (!EntityManager.TryGetComponent(entity, out PilotComponent? pilotComponent))
+        if (!TryComp(entity, out PilotComponent? pilotComponent))
             return;
 
         RemovePilot(entity, pilotComponent);
@@ -404,7 +404,7 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
     public NavInterfaceState GetNavState(Entity<RadarConsoleComponent?, TransformComponent?> entity, Dictionary<NetEntity, List<DockingPortState>> docks)
     {
         if (!Resolve(entity, ref entity.Comp1, ref entity.Comp2))
-            return new NavInterfaceState(SharedRadarConsoleSystem.DefaultMaxRange, null, null, docks, Shared._NF.Shuttles.Events.InertiaDampeningMode.Dampen, ServiceFlags.None); // Frontier: add inertia dampening
+            return new NavInterfaceState(SharedRadarConsoleSystem.DefaultMaxRange, null, null, docks, InertiaDampeningMode.Dampen, ServiceFlags.None, null, NetEntity.Invalid, true); // Frontier: add inertia dampening, target
 
         return GetNavState(
             entity,
@@ -420,7 +420,7 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
         Angle angle)
     {
         if (!Resolve(entity, ref entity.Comp1, ref entity.Comp2))
-            return new NavInterfaceState(SharedRadarConsoleSystem.DefaultMaxRange, GetNetCoordinates(coordinates), angle, docks, InertiaDampeningMode.Dampen, ServiceFlags.None); // Frontier: add inertial dampening
+            return new NavInterfaceState(SharedRadarConsoleSystem.DefaultMaxRange, GetNetCoordinates(coordinates), angle, docks, InertiaDampeningMode.Dampen, ServiceFlags.None, null, NetEntity.Invalid, true); // Frontier: add inertial dampening, target
 
         return new NavInterfaceState(
             entity.Comp1.MaxRange,
@@ -428,7 +428,10 @@ public sealed partial class ShuttleConsoleSystem : SharedShuttleConsoleSystem
             angle,
             docks,
             _shuttle.NfGetInertiaDampeningMode(entity), // Frontier
-            _shuttle.NfGetServiceFlags(entity)); // Frontier
+            _shuttle.NfGetServiceFlags(entity), // Frontier
+            entity.Comp1.Target, // Frontier
+            GetNetEntity(entity.Comp1.TargetEntity), // Frontier
+            entity.Comp1.HideTarget); // Frontier
     }
 
     /// <summary>

@@ -4,7 +4,7 @@
     "copyright": "blue-inhand-left, blue-inhand-right, voucherstationguard taken from tgstation at commit https://github.com/tgstation/tgstation/commit/d917f4c2a088419d5c3aec7656b7ff8cebd1822e.",
     "extra_copyright": [
         "blue, nfsd, voucher* by Whatstone (Discord)",
-        "vougchergeneral by NuclearCreeperIII"
+        "vouchergeneral by NuclearCreeperIII"
     ],
     "size": {
         "x": 32,
@@ -56,6 +56,9 @@
         },
         {
             "name": "vouchermedic"
+        },
+        {
+            "name": "voucherstationtrafficcontroller"
         }
     ]
 }

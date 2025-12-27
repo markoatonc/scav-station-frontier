@@ -1,8 +1,9 @@
 - type: entity
   parent: TelecomServer
   id: TelecomServerShuttle
-  name: telecommunications array
-  suffix: Ship Empty
+  name: short-range telecommunications array
+  description: Enables radio headset communication for the inserted encryption key, short-range channels only.
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Scav/Structures/Machines/telecomms.rsi #custom sprite for these
@@ -23,12 +24,12 @@
   - type: Machine
     board: TelecomServerShuttleCircuitboard
   - type: TelecomServer
+    longRange: false
     range: 64 # Pretty small range since these are for normal shuttles
 
 - type: entity
   parent: TelecomServerShuttle
   id: TelecomServerFilledShuttle
-  suffix: Ship
   components:
   - type: ContainerFill
     containers:

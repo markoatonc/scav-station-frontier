@@ -171,7 +171,6 @@
     - SuitStorageEVAPrivateSec
     - SuitStorageEVAHydro
     - SuitStorageEVAMail
-    - SuitStorageBasic
     - SuitStoragePilot
     - SuitStorageParamedic
     - SuitStorageEngi
@@ -721,6 +720,7 @@
     - SurveillanceCameraWirelessRouterCircuitboard
     - SurveillanceWirelessCameraMonitorCircuitboard
     # Boards
+    - CargoTechFabCircuitboardNF
     - SalvageTechFabCircuitboardNF
     - ServiceTechFabCircuitboard
     - EngineeringTechFabCircuitboard

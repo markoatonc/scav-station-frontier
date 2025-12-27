@@ -100,7 +100,7 @@
           type: Yinglet #End Scav
 
   footstepSound:
-    collection: FootstepBlood
+    collection: FootstepSlime # makes sense
     params:
       volume: 6
 
@@ -125,7 +125,7 @@
 #      - !type:SatiateThirst # Frontier
 #        factor: 1 # Frontier
   footstepSound:
-    collection: FootstepBlood
+    collection: FootstepSlime
     params:
       volume: 6
 

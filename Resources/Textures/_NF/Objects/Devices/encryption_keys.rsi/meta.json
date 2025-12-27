@@ -24,10 +24,16 @@
             "name": "crypt_silver"
         },
         {
+            "name": "greeting_label"
+        },
+        {
             "name": "stc_label"
         },
         {
             "name": "nfsd_label"
+        },
+        {
+            "name": "public_label"
         }
     ]
 }
