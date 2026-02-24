@@ -6,6 +6,8 @@ using Robust.Shared.Prototypes; // Frontier
 using Content.Shared.Roles; // Frontier
 using Robust.Shared.Utility; // Frontier
 using Content.Client._NF.StationRecords; // Frontier
+using Robust.Client.UserInterface.Controls;
+using Robust.Shared.Serialization;
 
 namespace Content.Client.StationRecords;
 
@@ -15,16 +17,20 @@ public sealed partial class GeneralStationRecordConsoleWindow : DefaultWindow
     [Dependency] private readonly IPrototypeManager _prototype = default!; // Frontier
 
     public Action<uint?>? OnKeySelected;
+    private readonly ButtonGroup _buttonGroup = new();
 
     public Action<StationRecordFilterType, string>? OnFiltersChanged;
     public Action<uint>? OnDeleted;
-
+    // public IReadOnlyDictionary<ProtoId<JobPrototype>, int?>? JobList { get; }
     public event Action<ProtoId<JobPrototype>>? OnJobAdd; // Frontier
     public event Action<ProtoId<JobPrototype>>? OnJobSubtract; // Frontier
     public event Action<string>? OnAdvertisementChanged; // Frontier
     private string? _lastAdvertisement; // Frontier
     private bool _advertisementEdited; // Frontier
     public const int MaxAdvertisementLength = 500; // Frontier
+    public bool HiringStatus = false; //scav
+    public event Action<ProtoId<JobPrototype>>? OpenJobsButtonPressed; //Scav
+    public event Action<ProtoId<JobPrototype>>? CloseJobsButtonPressed; //Scav
 
     private bool _isPopulating;
 
@@ -34,6 +40,21 @@ public sealed partial class GeneralStationRecordConsoleWindow : DefaultWindow
     {
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this); // Frontier
+
+
+        OpenJobsButton.Group = _buttonGroup;
+        CloseJobsButton.Group = _buttonGroup;
+        //scav
+        OpenJobsButton.OnPressed += _ =>
+        {
+            HiringStatus = true;
+            OpenJobsButtonPressed?.Invoke();
+        };
+        CloseJobsButton.OnPressed += _ =>
+        {
+            HiringStatus = false;
+            CloseJobsButtonPressed?.Invoke();
+        };
 
         _currentFilterType = StationRecordFilterType.Name;
 
@@ -126,11 +147,13 @@ public sealed partial class GeneralStationRecordConsoleWindow : DefaultWindow
 
         StationRecordsFilterType.SelectId((int)_currentFilterType);
 
+        SetJobStatus(HiringStatus);//scav
         // Frontier: job list, ship advertisements
         if (state.JobList != null)
         {
             JobListing.Visible = true;
             PopulateJobsContainer(state.JobList);
+
         }
 
         if (state.Advertisement != null)
@@ -251,4 +274,29 @@ public sealed partial class GeneralStationRecordConsoleWindow : DefaultWindow
         return advertisementText;
     }
     // End Frontier: job container
+
+    public void SetJobStatus(bool hirestate)
+    {
+        if (hirestate)
+            OpenJobsButton.Pressed = true;
+        else
+            CloseJobsButton.Pressed = true;
+    }
+    private void OnOpenJobsButtonPressed(IReadOnlyDictionary<ProtoId<JobPrototype>, int?> jobList)
+    {
+        HiringStatus = true;
+        foreach (var job in jobList)
+        {
+            SendMessage(new SetStationJobMsg(job, -1));
+        }
+    }
+
+    private void OnCloseJobsButtonPressed(IReadOnlyDictionary<ProtoId<JobPrototype>, int?> jobList)
+    {
+        HiringStatus = false;
+        foreach (var job in jobList)
+        {
+            SendMessage(new SetStationJobMsg(job, 0));
+        }
+    }
 }

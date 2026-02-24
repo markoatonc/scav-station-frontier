@@ -238,12 +238,14 @@ public sealed partial class StationJobsSystem : EntitySystem
         string jobPrototypeId,
         int amount,
         bool createSlot = false,
-        StationJobsComponent? stationJobs = null)
+        StationJobsComponent? stationJobs = null,
+        bool? scavvy = false)
     {
         if (!Resolve(station, ref stationJobs))
             throw new ArgumentException("Tried to use a non-station entity as a station!", nameof(station));
         if (amount < 0)
-            throw new ArgumentException("Tried to set a job to have a negative number of slots!", nameof(amount));
+            if(scavvy == false)
+                throw new ArgumentException("Tried to set a job to have a negative number of slots!", nameof(amount));
 
         var jobList = stationJobs.JobList;
 

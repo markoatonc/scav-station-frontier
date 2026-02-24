@@ -3,6 +3,37 @@
                Title="{Loc 'general-station-record-console-window-title'}"
                MinSize="800 500"> <!-- Frontier: width 750<800, add graphics namespace -->
     <BoxContainer Orientation="Vertical">
+<<<<<<< Updated upstream
+=======
+        <!-- <BoxContainer Margin="5 5 5 10" HorizontalExpand="True">
+            <OptionButton Name="StationRecordsFilterType" MinWidth="200" Margin="0 0 10 0"/>
+            <LineEdit Name="StationRecordsFiltersValue"
+                PlaceHolder="{Loc 'general-station-record-for-filter-line-placeholder'}" HorizontalExpand="True"/>
+            <Button Name="StationRecordsFilters" Text="{Loc 'general-station-record-console-search-records'}"/>
+            <Button Name="StationRecordsFiltersReset" Text="{Loc 'general-station-record-console-reset-filters'}"/>
+        </BoxContainer> -->
+        <BoxContainer Orientation="Vertical" Margin="5" MinWidth="328" MaxWidth="360">
+            <BoxContainer Orientation="Vertical">
+                <Label Text="Hiring" Name="Hiring" Access="Public" Visible="True"/>
+                <Control HorizontalExpand="True"/>
+                <Button Name="OpenJobsButton"
+                        Access="Public"
+                        ToolTip="Open hiring"
+                        ToggleMode="True"
+                        Text="Open"
+                        Visible="True"
+                        StyleClasses="OptionRight" />
+                <Button Name="CloseJobsButton"
+                        Access="Public"
+                        ToolTip="Close hiring"
+                        ToggleMode="True"
+                        Text="Closed"
+                        Visible="True"
+                        StyleClasses="OptionLeft" />
+                <Control HorizontalExpand="True"/>
+            </BoxContainer>
+        </BoxContainer>
+>>>>>>> Stashed changes
         <BoxContainer VerticalExpand="True">
             <!-- Record listing -->
             <BoxContainer Orientation="Vertical" Margin="5" MinWidth="328" MaxWidth="360">

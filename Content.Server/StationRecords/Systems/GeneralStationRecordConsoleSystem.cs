@@ -37,6 +37,7 @@ public sealed class GeneralStationRecordConsoleSystem : EntitySystem
             subs.Event<SetStationRecordFilter>(OnFiltersChanged);
             subs.Event<DeleteStationRecord>(OnRecordDelete);
             subs.Event<AdjustStationJobMsg>(OnAdjustJob); // Frontier
+            subs.Event<SetStationJobMsg>(OnSetJob); // Scav
             subs.Event<SetStationAdvertisementMsg>(OnAdvertisementChanged); // Frontier
             subs.Event<SetStationJobMsg>(OnSetJob);
 
@@ -67,6 +68,47 @@ public sealed class GeneralStationRecordConsoleSystem : EntitySystem
     {
         ent.Comp.ActiveKey = msg.SelectedKey;
         UpdateUserInterface(ent);
+    }
+
+    //scav hiring
+
+    private void OnSetJob(Entity<GeneralStationRecordConsoleComponent> ent, ref SetStationJobMsg msg)
+    {
+       var stationUid = _station.GetOwningStation(ent);
+        if (stationUid is EntityUid station)
+        {
+            // Frontier: check access - hack because we don't have an AccessReaderComponent, it's the station
+            if (TryComp(stationUid, out StationJobsComponent? stationJobs) &&
+                (stationJobs.Groups.Count > 0 || stationJobs.Tags.Count > 0))
+            {
+                var accessSources = _access.FindPotentialAccessItems(msg.Actor);
+                var access = _access.FindAccessTags(msg.Actor, accessSources);
+
+                // Check access groups and tags
+                bool hasAccess = stationJobs.Tags.Any(access.Contains);
+                if (!hasAccess)
+                {
+                    foreach (var group in stationJobs.Groups)
+                    {
+                        if (!_proto.TryIndex(group, out var accessGroup))
+                            continue;
+
+                        hasAccess = accessGroup.Tags.Any(access.Contains);
+                        if (hasAccess)
+                            break;
+                    }
+                }
+
+                if (!hasAccess)
+                {
+                    UpdateUserInterface(ent);
+                    return;
+                }
+            }
+            // End Frontier
+            _stationJobsSystem.TrySetJobSlot(station, msg.JobProto, msg.Amount, false, null, true);
+            UpdateUserInterface(ent);
+        }
     }
 
     // Frontier: job counts, advertisements

@@ -14,7 +14,13 @@ public sealed class AdjustStationJobMsg : BoundUserInterfaceMessage
         Amount = amount;
     }
 }
+//scav
+public sealed class SetStationJobMsg : BoundUserInterfaceMessage
+{
+    public string JobProto { get; }
+    public int Amount { get; }
 
+<<<<<<< Updated upstream
 
 [Serializable, NetSerializable]
 public sealed class SetStationJobMsg : BoundUserInterfaceMessage
@@ -22,13 +28,19 @@ public sealed class SetStationJobMsg : BoundUserInterfaceMessage
     public string JobProto { get; }
     public int Amount { get; }
 
+=======
+>>>>>>> Stashed changes
     public SetStationJobMsg(string jobProto, int amount)
     {
         JobProto = jobProto;
         Amount = amount;
     }
 }
+<<<<<<< Updated upstream
 
+=======
+//endscav
+>>>>>>> Stashed changes
 [Serializable, NetSerializable]
 public sealed class SetStationAdvertisementMsg : BoundUserInterfaceMessage
 {

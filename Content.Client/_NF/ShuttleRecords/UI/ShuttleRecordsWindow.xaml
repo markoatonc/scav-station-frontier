@@ -22,7 +22,7 @@
 
         <BoxContainer HorizontalExpand="True" VerticalExpand="True" Orientation="Horizontal" Margin="10">
 
-            <BoxContainer Orientation="Vertical" Margin="0 0 10 0" VerticalExpand="True">
+            <!-- <BoxContainer Orientation="Vertical" Margin="0 0 10 0" VerticalExpand="True">
                 <BoxContainer Orientation="Vertical" Margin="0 0 0 5">
                     <Label Text="{Loc 'shuttle-records-search'}" StyleClasses="LabelSubText" Margin="0 0 5 0" />
                     <BoxContainer Orientation="Horizontal">
@@ -30,9 +30,27 @@
                         <Button Name="ClearSearchButton" Access="Public" Text="✖" Margin="5 0 0 0" />
                     </BoxContainer>
                     <CheckBox Name="ShowActiveOnlyCheckbox" Text="{Loc 'shuttle-records-show-active-only'}" />
-                </BoxContainer>
-
-                <BoxContainer Orientation="Vertical" MinSize="250 300" VerticalExpand="True">
+                </BoxContainer> -->
+        <BoxContainer Orientation="Vertical" Margin="5" MinWidth="328" MaxWidth="360">
+            <BoxContainer Orientation="Horizontal">
+                <Label Text="Hiring" Name="Hiring" Access="Public"/>
+                <Control HorizontalExpand="True"/>
+                <Button Name="OpenJobsButton"
+                        Access="Public"
+                        ToolTip="Open hiring"
+                        ToggleMode="True"
+                        Text="Open"
+                        StyleClasses="OptionRight" />
+                <Button Name="CloseJobsButton"
+                        Access="Public"
+                        ToolTip="Close hiring"
+                        ToggleMode="True"
+                        Text="Closed"
+                        StyleClasses="OptionLeft" />
+                <Control HorizontalExpand="True"/>
+            </BoxContainer>
+        </BoxContainer>
+                 <!-- <BoxContainer Orientation="Vertical" MinSize="250 300" VerticalExpand="True">
                     <PanelContainer VerticalExpand="True" HorizontalExpand="True">
                         <PanelContainer.PanelOverride>
                             <graphics:StyleBoxFlat BorderThickness="2" BorderColor="#777777" />
@@ -55,7 +73,7 @@
                             </ScrollContainer>
                         </BoxContainer>
                     </PanelContainer>
-                </BoxContainer>
+                </BoxContainer> -->
             </BoxContainer>
 
             <BoxContainer Name="ShuttleRecordDetailsContainer" Orientation="Vertical" MinSize="250 250" VerticalExpand="True">

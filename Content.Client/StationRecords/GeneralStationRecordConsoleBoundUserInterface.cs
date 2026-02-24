@@ -3,6 +3,7 @@ using Robust.Client.UserInterface;
 using Content.Shared._NF.StationRecords; // Frontier
 using Content.Shared.Roles; // Frontier
 using Robust.Shared.Prototypes; // Frontier
+using Content.Shared.StationRecords.Components; //scav
 
 namespace Content.Client.StationRecords;
 
@@ -10,7 +11,8 @@ public sealed class GeneralStationRecordConsoleBoundUserInterface : BoundUserInt
 {
     [ViewVariables]
     private GeneralStationRecordConsoleWindow? _window = default!;
-
+    public readonly StationRecordsFilter? Filter;
+    private StationRecordFilterType _currentFilterType;
     public GeneralStationRecordConsoleBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
     }
@@ -28,7 +30,37 @@ public sealed class GeneralStationRecordConsoleBoundUserInterface : BoundUserInt
         _window.OnJobSubtract += OnJobsSubtract; // Frontier: job modification buttons
         _window.OnDeleted += id => SendMessage(new DeleteStationRecord(id));
         _window.OnAdvertisementChanged += OnAdvertisementChanged; // Frontier: job modification buttons
+        _window.OpenJobsButtonPressed += OnOpenJobsButtonPressed;
+        _window.CloseJobsButtonPressed += OnCloseJobsButtonPressed;
     }
+
+
+    private void OpenJobsButtonPressed(ProtoId<JobPrototype> job)
+    {
+        SendMessage(new SetStationJobMsg(job, -1));
+    }
+    private void CloseJobsButtonPressed(ProtoId<JobPrototype> job)
+    {
+        SendMessage(new SetStationJobMsg(job, 0));
+    }
+    private void OnOpenJobsButtonPressed(IReadOnlyDictionary<ProtoId<JobPrototype>, int?> jobList)
+    {
+        foreach (var job in jobList)
+        {
+            SendMessage(new SetStationJobMsg(job.Key, -1));
+        }
+    }
+
+    private void OnCloseJobsButtonPressed(IReadOnlyDictionary<ProtoId<JobPrototype>, int?> jobList)
+    {
+        foreach (var job in jobList)
+        {
+
+            SendMessage(new SetStationJobMsg(job.Value.ID, 0));
+        }
+    }
+
+
 
     // Frontier: job modification buttons, ship advertisements
     private void OnJobsAdd(ProtoId<JobPrototype> job)
@@ -58,7 +90,9 @@ public sealed class GeneralStationRecordConsoleBoundUserInterface : BoundUserInt
 
         if (state is not GeneralStationRecordConsoleState cast)
             return;
-
+        _window.SetJobStatus(_window.HiringStatus);
         _window?.UpdateState(cast);
     }
+
+
 }
